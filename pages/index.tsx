@@ -114,7 +114,7 @@ const Home: NextPage = () => {
         <div className="mx-auto max-w-7xl px-4  sm:px-6 lg:px-8">
           <div className="bg-[#F3F4F6]">
             <div className="mx-auto max-w-7xl">
-              <div className="grid grid-cols-1 gap-px shadow-sm rounded-sm bg-[#F3F4F6] sm:grid-cols-2 lg:grid-cols-4">
+              <div className="grid grid-cols-1 gap-px  rounded-sm bg-[#F3F4F6] sm:grid-cols-2 lg:grid-cols-4">
                 {stats.map((stat) => (
                   <div
                     key={stat.name}

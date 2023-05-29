@@ -86,7 +86,7 @@ const Home: NextPage = () => {
     <div className="bg-[#F3F4F6]">
       <Head>
         <title>sBTC Signer</title>
-        <meta name="description" content="Reat" />
+        <meta name="description" content="sBTC Web Signer" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className="bg-black">

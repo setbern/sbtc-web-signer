@@ -7,10 +7,10 @@ import { useState } from "react";
 import TxDetail from "../src/comp/TxDetail";
 
 const stats = [
-  { name: "Current Cycle", value: "4053", unit: "block" },
+  { name: "Current Cycle", value: "4053" },
   { name: "Approved Tx's", value: "50" },
   { name: "Rejected Tx's", value: "12" },
-  { name: "Total sBTC", value: "" },
+  { name: "Total sBTC", value: "358,000,000" },
 ];
 
 const people = [
@@ -127,11 +127,11 @@ const Home: NextPage = () => {
                       <span className="text-4xl font-semibold tracking-tight text-black">
                         {stat.value}
                       </span>
-                      {stat.unit ? (
+                      {/* {stat.unit ? (
                         <span className="text-sm text-gray-400">
                           {stat.unit}
                         </span>
-                      ) : null}
+                      ) : null} */}
                     </p>
                   </div>
                 ))}

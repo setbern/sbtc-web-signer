@@ -83,13 +83,17 @@ const Home: NextPage = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="bg-[#F3F4F6]">
+    <div className="">
       <Head>
         <title>sBTC Signer</title>
         <meta name="description" content="sBTC Web Signer" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header className="bg-black">
+      <header
+        style={{
+          background: "rgba(0, 0, 0, 0.9)",
+        }}
+      >
         <div className="py-5 pb-20">
           <div className="mx-auto max-w-7xl px-4 flex flex-wrap items-center gap-6 sm:flex-nowrap sm:px-6 lg:px-8">
             <h1 className="text-3xl  font-bold tracking-tight text-white">
@@ -112,9 +116,9 @@ const Home: NextPage = () => {
 
       <main className="-mt-12">
         <div className="mx-auto max-w-7xl px-4  sm:px-6 lg:px-8">
-          <div className="bg-[#F3F4F6]">
+          <div className="">
             <div className="mx-auto max-w-7xl">
-              <div className="grid grid-cols-1 gap-px  rounded-sm bg-[#F3F4F6] sm:grid-cols-2 lg:grid-cols-4">
+              <div className="grid grid-cols-1 gap-px  rounded-sm  sm:grid-cols-2 lg:grid-cols-4">
                 {stats.map((stat) => (
                   <div
                     key={stat.name}
@@ -167,7 +171,7 @@ const Home: NextPage = () => {
               </div>
             </div>
           </div>
-          <div className=" mt-4 flow-root bg-white px-4">
+          <div className=" mt-4 flow-root  px-4">
             <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                 <table className="min-w-full divide-y divide-gray-300">

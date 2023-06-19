@@ -4,7 +4,12 @@ import Navigation from "../src/comp/nav/Navigation";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className="min-h-screen bg-[#F3F4F6]">
+    <div
+      style={{
+        background: "rgba(0, 0, 0, 0.9)",
+      }}
+      className="min-h-screen "
+    >
       <Navigation />
       <Component {...pageProps} />
     </div>

@@ -23,7 +23,12 @@ const userNavigation = [
 
 const Navigation = () => {
   return (
-    <Disclosure as="nav" className="bg-black">
+    <Disclosure
+      as="nav"
+      style={{
+        background: "rgba(0, 0, 0, 0.9)",
+      }}
+    >
       {({ open }) => (
         <>
           <div className="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8">

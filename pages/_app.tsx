@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       style={{
         background: "rgba(0, 0, 0, 0.9)",
       }}
-      className="min-h-screen "
+      className="h-screen"
     >
       <Navigation />
       <Component {...pageProps} />

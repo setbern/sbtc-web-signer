@@ -5,13 +5,7 @@ import styles from "../src/styles/Home.module.css";
 import { classNames } from "../src/const/util";
 import { useState } from "react";
 import TxDetail from "../src/comp/TxDetail";
-
-const stats = [
-  { name: "Current Cycle", value: "4053" },
-  { name: "Approved Tx's", value: "50" },
-  { name: "Rejected Tx's", value: "12" },
-  { name: "Total sBTC", value: "358,000,000" },
-];
+import HomeDashboard from "../src/comp/HomeDashboard";
 
 const people = [
   {
@@ -80,10 +74,13 @@ const tabs = [
 ];
 
 const Home: NextPage = () => {
-  const [open, setOpen] = useState(false);
-
   return (
-    <div className="">
+    <div
+      style={{
+        background: "rgba(0, 0, 0, 0.9)",
+      }}
+      className=""
+    >
       <Head>
         <title>sBTC Signer</title>
         <meta name="description" content="sBTC Web Signer" />
@@ -93,57 +90,15 @@ const Home: NextPage = () => {
         style={{
           background: "rgba(0, 0, 0, 0.9)",
         }}
-      >
-        <div className="py-5 pb-20">
-          <div className="mx-auto max-w-7xl px-4 flex flex-wrap items-center gap-6 sm:flex-nowrap sm:px-6 lg:px-8">
-            <h1 className="text-3xl  font-bold tracking-tight text-white">
-              Signer
-            </h1>
-            <div className="order-last flex w-full gap-x-8 text-sm font-semibold leading-6 sm:order-none sm:w-auto sm:border-l sm:border-gray-200 sm:pl-6 sm:leading-7">
-              <a href="#" className="text-secondary">
-                Last 7 days
-              </a>
-              <a href="#" className="text-white">
-                Last 30 days
-              </a>
-              <a href="#" className="text-white">
-                All-time
-              </a>
-            </div>
-          </div>
-        </div>
-      </header>
+      ></header>
 
-      <main className="-mt-12">
-        <div className="mx-auto max-w-7xl px-4  sm:px-6 lg:px-8">
-          <div className="">
-            <div className="mx-auto max-w-7xl">
-              <div className="grid grid-cols-1 gap-px  rounded-sm  sm:grid-cols-2 lg:grid-cols-4">
-                {stats.map((stat) => (
-                  <div
-                    key={stat.name}
-                    className="bg-white px-4 py-6 sm:px-6 lg:px-8"
-                  >
-                    <p className="text-sm font-medium leading-6 text-gray-400">
-                      {stat.name}
-                    </p>
-                    <p className="mt-2 flex items-baseline gap-x-2">
-                      <span className="text-4xl font-semibold tracking-tight text-black">
-                        {stat.value}
-                      </span>
-                      {/* {stat.unit ? (
-                        <span className="text-sm text-gray-400">
-                          {stat.unit}
-                        </span>
-                      ) : null} */}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-        <TxDetail open={open} setOpen={setOpen} />
+      <main
+        style={{
+          background: "rgba(0, 0, 0, 0.9)",
+        }}
+        className=""
+      >
+        <HomeDashboard />
         <div className="mx-auto max-w-7xl  pb-12 px-4 sm:px-6 lg:px-8">
           <div className="border-b border-gray-200">
             <div className="sm:flex sm:items-baseline">
@@ -247,14 +202,14 @@ const Home: NextPage = () => {
                         <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                           {person.role}
                         </td>
-                        <td
+                        {/* <td
                           onClick={() => setOpen(true)}
                           className="relative cursor-pointer whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0"
                         >
                           <a className="text-secondary hover:text-secondary-dark">
                             View<span className="sr-only">, {person.name}</span>
                           </a>
-                        </td>
+                        </td> */}
                       </tr>
                     ))}
                   </tbody>

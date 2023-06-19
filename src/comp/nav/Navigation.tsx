@@ -3,6 +3,8 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { PlusIcon, UserIcon, WalletIcon } from "@heroicons/react/20/solid";
 import { classNames } from "../../const/util";
+import Image from "next/image";
+import stxLogo from "../../../public/images/stxLogo.svg";
 
 const user = {
   name: "SPXXX",
@@ -13,6 +15,8 @@ const user = {
 const navigation = [
   { name: "Signer", href: "#", current: true },
   { name: "Delegation", href: "#", current: false },
+  { name: "Config", href: "#", current: false },
+  { name: "FAQ", href: "#", current: false },
 ];
 
 const userNavigation = [
@@ -31,8 +35,8 @@ const Navigation = () => {
     >
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8">
-            <div className="flex h-16 justify-between">
+          <div className="mx-auto max-w-7xl pt-10 px-4 sm:px-6 lg:px-8">
+            <div className="flex h-16 items-center justify-between">
               <div className="flex">
                 <div className="-ml-2 mr-2 flex items-center md:hidden">
                   {/* Mobile menu button */}
@@ -46,20 +50,18 @@ const Navigation = () => {
                   </Disclosure.Button>
                 </div>
                 <div className="flex flex-shrink-0 items-center">
-                  <p className="text-md font-semibold text-white ml-2">
-                    sBTC Signer
-                  </p>
+                  <Image src={stxLogo} alt="stx-logo" className="h-24 w-24" />
                 </div>
-                <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
+                <div className="hidden md:ml-20 md:flex md:items-center md:space-x-4">
                   {navigation.map((item) => (
                     <a
                       key={item.name}
                       href={item.href}
                       className={classNames(
                         item.current
-                          ? "bg-gray-900 text-white"
+                          ? " text-secondary"
                           : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                        "rounded-md px-3 py-2 text-sm font-medium"
+                        "rounded-md px-3 py-2 text-lg font-medium"
                       )}
                       aria-current={item.current ? "page" : undefined}
                     >
@@ -68,31 +70,31 @@ const Navigation = () => {
                   ))}
                 </div>
               </div>
-              <div className="flex items-center">
+              <div className=" ">
                 <div className="flex-shrink-0">
                   <button
                     type="button"
-                    className="relative inline-flex items-center gap-x-8 rounded-sm bg-secondary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-secondary-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+                    className="relative inline-flex items-center gap-x-8 rounded-xl bg-secondary px-3 py-2 text-md font-semibold text-black shadow-sm hover:bg-secondary-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
                   >
+                    Connect Wallet
                     <WalletIcon
                       className="-ml-0.5 h-5 w-5"
                       aria-hidden="true"
                     />
-                    Connect Wallet
                   </button>
                 </div>
                 <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
-                  <button
+                  {/* <button
                     type="button"
                     className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                   >
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
+                  </button> */}
 
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
-                    <div>
+                    {/* <div>
                       <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none  focus:ring-offset-gray-800">
                         <span className="sr-only">Open user menu</span>
                         <UserIcon
@@ -100,7 +102,7 @@ const Navigation = () => {
                           aria-hidden="true"
                         />
                       </Menu.Button>
-                    </div>
+                    </div> */}
                     <Transition
                       as={Fragment}
                       enter="transition ease-out duration-200"

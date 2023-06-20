@@ -15,8 +15,6 @@ import {
 } from "../atoms/atomTypes";
 
 const HomeDashboard = () => {
-  const [open, setOpen] = useState(false);
-
   const [dateRangeFilter, setDateRange] = useState(0);
   const [signerTxData, setSignerTxData] = useAtom(signerTxDataAtom); // [
 
@@ -192,7 +190,7 @@ const HomeDashboard = () => {
           </div>
         </div>
       </div>
-      {/* <TxDetail open={open} setOpen={setOpen} /> */}
+
       <DashboardStats />
       <TransactionHistory />
     </>

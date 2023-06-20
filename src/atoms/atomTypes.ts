@@ -34,6 +34,7 @@ export enum TX_CHAIN_TYPE {
 }
 
 export enum TX_KIND {
+  none = "none",
   DepositReveal = "DepositReveal",
   WithdrawalReveal = "WithdrawalReveal",
   WithdrawalFulfill = "WithdrawalFulfill",

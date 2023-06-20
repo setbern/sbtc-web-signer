@@ -2,6 +2,7 @@ import { useState } from "react";
 import TxDetail from "./TxDetail";
 import DashboardStats from "./DashboardStats";
 import { classNames } from "../const/util";
+import TransactionHistory from "./TransactionHistory";
 
 const HomeDashboard = () => {
   const [open, setOpen] = useState(false);
@@ -50,6 +51,7 @@ const HomeDashboard = () => {
       </div>
       <TxDetail open={open} setOpen={setOpen} />
       <DashboardStats />
+      <TransactionHistory />
     </>
   );
 };

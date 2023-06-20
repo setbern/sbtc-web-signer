@@ -6,6 +6,10 @@ const stats = [
   { name: "Rejected Tx's", value: "12" },
   { name: "Total sBTC", value: "358,000,000" },
 ];
+
+interface StatProps {
+  changeTimeFilter: (filter: number) => void;
+}
 const DashboardStats = () => {
   return (
     <div className="mx-auto max-w-7xl px-4  sm:px-6 lg:px-8">
@@ -14,10 +18,20 @@ const DashboardStats = () => {
           <div
             key={stat.name}
             className={classNames(
-              i === 0 ? "rounded-tl-2xl rounded-bl-2xl  border-r-0" : "",
-              i === 3 ? "rounded-br-2xl rounded-tr-2xl  border-l-0" : "",
-              i === 1 ? "  border-r-0" : "",
-              "flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 bg-[#121212]  py-6 sm:px-6 xl:px-8 border-[#616161] border"
+              i === 0
+                ? "rounded-t-2xl sm:rounded-tr-none lg:rounded-tl-2xl lg:rounded-bl-2xl  lg:border-r-0 lg:rounded-tr-none"
+                : "",
+              i === 1
+                ? " sm:rounded-tr-2xl sm:rounded-br-none lg:rounded-tr-none lg:border-r-0"
+                : "",
+              "flex flex-wrap  items-baseline justify-between gap-x-4 gap-y-2 bg-[#121212]  py-6 px-6 xl:px-8 border-[#616161] border",
+              i === 2
+                ? "sm:rounded-bl-2xl  sm:rounded-br-none lg:rounded-none "
+                : "",
+              "flex flex-wrap  items-baseline justify-between gap-x-4 gap-y-2 bg-[#121212]  py-6 px-6 xl:px-8 border-[#616161] border",
+              i === 3
+                ? "rounded-br-2xl rounded-bl-2xl sm:rounded-bl-none lg:rounded-br-2xl lg:rounded-tr-2xl  lg:border-l-0  lg:rounded-bl-none"
+                : ""
             )}
           >
             <dt className="text-md font-medium leading-6 text-sub-gray">

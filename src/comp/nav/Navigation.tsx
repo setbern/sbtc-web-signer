@@ -49,8 +49,11 @@ const Navigation = () => {
                     )}
                   </Disclosure.Button>
                 </div>
-                <div className="flex flex-shrink-0 items-center">
-                  <Image src={stxLogo} alt="stx-logo" className="h-24 w-24" />
+                <div className="flex flex-col flex-shrink-0 items-center">
+                  <Image src={stxLogo} alt="stx-logo" className="h-10 w-24" />
+                  <h1 className="text-md font-bold text-secondary">
+                    sBTC Signer
+                  </h1>
                 </div>
                 <div className="hidden md:ml-20 md:flex md:items-center md:space-x-4">
                   {navigation.map((item) => (

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { people } from "../../pages";
-import { TX_KIND } from "../atoms/atomTypes";
-import { classNames } from "../const/util";
+import { TX_CHAIN_TYPE, TX_KIND } from "../atoms/atomTypes";
+import { classNames, displayAddy } from "../const/util";
+import { useAtomValue } from "jotai";
+import { signerTxDataAtom } from "../atoms";
 
 export const tabs = [
   { name: "All", type: TX_KIND.none },
@@ -13,6 +15,10 @@ export const tabs = [
 
 const TransactionHistory = () => {
   const [txTypeFilter, setTxType] = useState<TX_KIND>(TX_KIND.none);
+
+  const signerData = useAtomValue(signerTxDataAtom);
+
+  const renderTxs = () => {};
   return (
     <div className="mx-auto max-w-7xl  pt-20 pb-12 px-4  sm:px-6 lg:px-8">
       <div className="  border-[#616161] border-b-0 rounded-t-2xl border bg-[#121212] ">
@@ -57,7 +63,7 @@ const TransactionHistory = () => {
                     scope="col"
                     className="py-3.5 pl-4 pr-3 text-left text-md font-semibold text-white sm:pl-0"
                   >
-                    Stage
+                    Consensus
                   </th>
                   <th
                     scope="col"
@@ -69,7 +75,7 @@ const TransactionHistory = () => {
                     scope="col"
                     className="px-3 py-3.5 text-left text-md font-semibold text-white "
                   >
-                    Sats
+                    Amount
                   </th>
                   <th
                     scope="col"
@@ -84,35 +90,50 @@ const TransactionHistory = () => {
                     Block #
                   </th>
                   <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">
-                    <span className="sr-only">Edit</span>
+                    <span className="sr-only">View</span>
                   </th>
                 </tr>
               </thead>
               <tbody className=" ">
-                {people.map((person) => (
-                  <tr key={person.name}>
+                {signerData.map((tx) => (
+                  <tr key={tx.transaction.txid}>
                     <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm font-medium text-white ">
-                      {person.name}
+                      {tx.transaction.transaction_kind}
                     </td>
                     <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                       <div className="font-medium text-white ">
-                        {person.stage}
+                        {`${tx.vote_tally.current_consensus} / 350 (${
+                          (
+                            (tx.vote_tally.current_consensus / 350) *
+                            100
+                          ).toFixed(1) as any
+                        }%)`}
                       </div>
                     </td>
 
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-white ">
-                      <div className="text-white ">{person.title}</div>
+                      <div className="text-white ">
+                        {displayAddy(
+                          tx.transaction.transaction_credit_address.address
+                        )}
+                      </div>
                     </td>
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-white ">
-                      <div className="text-white ">{person.sats}</div>
+                      <div className="text-white ">
+                        {tx.transaction.transaction_amount}
+                        {tx.transaction.transaction_credit_address.type ===
+                        TX_CHAIN_TYPE.STACKS
+                          ? " sBTC"
+                          : " BTC"}
+                      </div>
                     </td>
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-white ">
                       <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                        Approved
+                        {tx.vote_tally.vote_status}
                       </span>
                     </td>
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-white ">
-                      {person.role}
+                      {tx.transaction.transaction_block_height}
                     </td>
                     {/* <td
                     onClick={() => setOpen(true)}

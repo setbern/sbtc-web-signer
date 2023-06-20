@@ -1,13 +1,18 @@
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { PaperClipIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { SIGNER_TX_DATA } from "../atoms/atomTypes";
 
 type txDetail = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   open: any;
+  txDetail: SIGNER_TX_DATA | null;
 };
 
-const TxDetail = ({ setOpen, open }: txDetail) => {
+const TxDetail = ({ setOpen, open, txDetail }: txDetail) => {
+  if (!txDetail) {
+    return null;
+  }
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>

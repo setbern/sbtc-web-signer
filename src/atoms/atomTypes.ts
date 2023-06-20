@@ -44,6 +44,7 @@ export enum TX_KIND {
 export enum VOTE_CHOICE {
   approve = "approve",
   reject = "reject",
+  no_vote = "no_vote",
 }
 export enum VOTE_MECHANISM {
   auto = "auto",

@@ -192,7 +192,7 @@ const HomeDashboard = () => {
           </div>
         </div>
       </div>
-      <TxDetail open={open} setOpen={setOpen} />
+      {/* <TxDetail open={open} setOpen={setOpen} /> */}
       <DashboardStats />
       <TransactionHistory />
     </>

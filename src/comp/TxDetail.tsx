@@ -60,6 +60,7 @@ const TxDetail = ({ setOpen, open, txDetail }: txDetail) => {
       }
     });
 
+    localStorage.setItem("signerTxData", JSON.stringify(latestData));
     setSignerTxData(latestData);
     setShow(true);
     setOpen(false);
@@ -287,7 +288,7 @@ const TxDetail = ({ setOpen, open, txDetail }: txDetail) => {
                                     type="button"
                                     className="relative inline-flex items-center gap-x-8 rounded-xl bg-secondary px-4 py-2 text-md font-semibold text-black shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
                                   >
-                                    Approved
+                                    Approve
                                   </button>
                                   <button
                                     onClick={() => handleVote(false)}

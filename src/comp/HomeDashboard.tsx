@@ -134,7 +134,10 @@ const HomeDashboard = () => {
         transaction: _TX,
         vote_tally: voteTally,
         vote_mechanism: votemech,
-        vote_choice: voiceChoice,
+        vote_choice:
+          votemech === VOTE_MECHANISM.manual
+            ? VOTE_CHOICE.no_vote
+            : voiceChoice,
       };
 
       signerTxDataTemp.push(signerTxData);

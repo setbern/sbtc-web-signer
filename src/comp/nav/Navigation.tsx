@@ -14,9 +14,9 @@ const user = {
 
 const navigation = [
   { name: "Signer", href: "#", current: true },
-  { name: "Delegation", href: "#", current: false },
-  { name: "Config", href: "#", current: false },
-  { name: "FAQ", href: "#", current: false },
+  // { name: "Delegation", href: "#", current: false },
+  // { name: "Config", href: "#", current: false },
+  // { name: "FAQ", href: "#", current: false },
 ];
 
 const userNavigation = [

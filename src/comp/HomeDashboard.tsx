@@ -160,7 +160,7 @@ const HomeDashboard = () => {
   };
   return (
     <>
-      <div className="py-5 pt-20 ">
+      {/* <div className="py-5 pt-20 ">
         <div className="mx-auto max-w-7xl px-4 flex flex-wrap justify-end items-center gap-6 sm:flex-nowrap sm:px-6 lg:px-8">
           <div className="order-last flex justify-end w-full gap-x-8 text-sm font-semibold leading-6 sm:order-none sm:w-auto sm:pl-6 sm:leading-7">
             <a
@@ -192,7 +192,7 @@ const HomeDashboard = () => {
             </a>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <DashboardStats />
       <TransactionHistory />

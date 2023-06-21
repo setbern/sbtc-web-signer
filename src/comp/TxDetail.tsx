@@ -43,7 +43,7 @@ const TxInfoTile = ({
 const TxDetail = ({ setOpen, open, txDetail }: txDetail) => {
   const [signerTxData, setSignerTxData] = useAtom(signerTxDataAtom); // [
 
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   if (!txDetail) {
     return null;

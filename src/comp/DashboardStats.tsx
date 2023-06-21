@@ -1,7 +1,10 @@
+import { useAtomValue } from "jotai";
 import { classNames } from "../const/util";
+import { signerTxDataAtom } from "../atoms";
+import { VOTE_CHOICE } from "../atoms/atomTypes";
 
 const stats = [
-  { name: "Current Cycle", value: "4053" },
+  { name: "Total Tx's", value: "4053" },
   { name: "Approved Tx's", value: "50" },
   { name: "Rejected Tx's", value: "12" },
   { name: "Total sBTC", value: "358,000,000" },
@@ -11,6 +14,42 @@ interface StatProps {
   changeTimeFilter: (filter: number) => void;
 }
 const DashboardStats = () => {
+  const signerData = useAtomValue(signerTxDataAtom);
+
+  const findTotalApproved = () => {
+    let total = 0;
+    signerData.forEach((tx) => {
+      if (tx.vote_choice === VOTE_CHOICE.approve) {
+        total++;
+      }
+    });
+    return total;
+  };
+  const findTotalrRejected = () => {
+    let total = 0;
+    signerData.forEach((tx) => {
+      if (tx.vote_choice === VOTE_CHOICE.reject) {
+        console.log(tx);
+        total++;
+      }
+    });
+    return total;
+  };
+
+  const renderValue = (name: string) => {
+    switch (name) {
+      case "Total Tx's":
+        return signerData.length;
+      case "Approved Tx's":
+        return findTotalApproved();
+      case "Rejected Tx's":
+        return findTotalrRejected();
+      case "Total sBTC":
+        return "358,000,000";
+      default:
+        return "0";
+    }
+  };
   return (
     <div className="mx-auto max-w-7xl px-4  sm:px-6 lg:px-8">
       <dl className="mx-auto grid grid-cols-1 gap-px  sm:grid-cols-2 lg:grid-cols-4">
@@ -46,7 +85,7 @@ const DashboardStats = () => {
             {stat.change}
           </dd> */}
             <dd className="w-full flex-none text-white text-3xl font-medium leading-10 tracking-tight t">
-              {stat.value}
+              {renderValue(stat.name)}
             </dd>
           </div>
         ))}

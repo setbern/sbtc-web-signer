@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { people } from "../../pages";
 import {
   SIGNER_TX_DATA,
@@ -23,6 +23,8 @@ export const tabs = [
 
 const TransactionHistory = () => {
   const [txTypeFilter, setTxType] = useState<TX_KIND>(TX_KIND.none);
+  const [txLength, setTxLength] = useState<SIGNER_TX_DATA[]>([]);
+
   const [open, setOpen] = useState(false);
 
   const [selectedTx, setSelectedTx] = useState<null | SIGNER_TX_DATA>(null);
@@ -32,6 +34,46 @@ const TransactionHistory = () => {
   const handleTxClick = (tx: SIGNER_TX_DATA) => {
     setSelectedTx(tx);
     setOpen(true);
+  };
+
+  useEffect(() => {
+    calculateTxlengh();
+  }, [txTypeFilter, signerData]);
+
+  const calculateTxlengh = () => {
+    const tableData = signerData
+      .filter((tx) => {
+        if (txTypeFilter === TX_KIND.none) {
+          return true;
+        } else if (txTypeFilter === TX_KIND.DepositReveal) {
+          return tx.transaction.transaction_kind === TX_KIND.DepositReveal;
+        } else if (txTypeFilter === TX_KIND.WithdrawalReveal) {
+          return tx.transaction.transaction_kind === TX_KIND.WithdrawalReveal;
+        } else if (txTypeFilter === TX_KIND.WithdrawalFulfill) {
+          return tx.transaction.transaction_kind === TX_KIND.WithdrawalFulfill;
+        } else if (txTypeFilter === TX_KIND.WalletHandoff) {
+          return tx.transaction.transaction_kind === TX_KIND.WalletHandoff;
+        } else {
+          return true;
+        }
+      })
+      .sort((a, b) => {
+        // sort by block height
+        // if block height is null should be at the top
+        if (a.transaction.transaction_block_height === null) {
+          return -1;
+        }
+        if (b.transaction.transaction_block_height === null) {
+          return 1;
+        }
+
+        return (
+          b.transaction.transaction_block_height -
+          a.transaction.transaction_block_height
+        );
+      });
+
+    setTxLength(tableData);
   };
   const renderTxs = () => {
     const tableData = signerData
@@ -65,6 +107,8 @@ const TransactionHistory = () => {
           a.transaction.transaction_block_height
         );
       });
+
+    //setTxLength(tableData);
 
     return tableData.map((tx) => {
       return (
@@ -146,7 +190,10 @@ const TransactionHistory = () => {
         <div className="  border-[#616161] border-b-0 rounded-t-2xl border bg-[#121212] ">
           <div className="sm:flex flex-col lg:flex-row gap-y-4 justify-start lg:justify-between px-4 lg:px-10 sm:items-baseline pt-16 ">
             <h1 className="text-2xl md:text-4xl    font-semibold leading-6 text-white">
-              Transactions
+              Transactions {""}
+              <span className="text-lg font-medium text-gray-400">
+                ({txLength.length})
+              </span>
             </h1>
             <div className="mt-4 sm:ml-10 sm:mt-0">
               <nav className="-mb-px flex flex-wrap space-x-8">
@@ -171,7 +218,7 @@ const TransactionHistory = () => {
             </div>
           </div>
         </div>
-        <div className="flow-root  border-[#616161] border-t-0 rounded-b-2xl border bg-[#121212] px-4">
+        <div className="flow-root pt-10 border-[#616161] border-t-0 rounded-b-2xl border bg-[#121212] px-4">
           <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-12">
               <table className="min-w-full divide-y  divide-gray-300">

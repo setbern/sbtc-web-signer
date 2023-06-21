@@ -119,7 +119,7 @@ const HomeDashboard = () => {
       }
 
       const voiceChoice =
-        Math.random() >= 0.5 ? VOTE_CHOICE.approve : VOTE_CHOICE.reject;
+        Math.random() >= 0.85 ? VOTE_CHOICE.reject : VOTE_CHOICE.approve;
       const votemech =
         Math.random() >= 0.8 ? VOTE_MECHANISM.manual : VOTE_MECHANISM.auto;
       const voteTally = {

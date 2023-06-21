@@ -198,10 +198,7 @@ const TransactionHistory = () => {
                     >
                       Block #
                     </th>
-                    <th
-                      scope="col"
-                      className="relative py-3.5 pl-3 pr-4 sm:pr-0"
-                    >
+                    <th scope="col" className=" py-3.5 pl-3 pr-4 sm:pr-0">
                       <span className="sr-only">View</span>
                     </th>
                   </tr>

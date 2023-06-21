@@ -8,9 +8,12 @@ import {
 import {
   SIGNER_TX_DATA,
   TX_CHAIN_TYPE,
+  VOTE_CHOICE,
   VOTE_MECHANISM,
 } from "../atoms/atomTypes";
 import { capitalCase, sentenceCase } from "change-case";
+import { signerTxDataAtom } from "../atoms";
+import { useAtom } from "jotai";
 
 type txDetail = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -38,16 +41,34 @@ const TxInfoTile = ({
   );
 };
 const TxDetail = ({ setOpen, open, txDetail }: txDetail) => {
+  const [signerTxData, setSignerTxData] = useAtom(signerTxDataAtom); // [
+
   const [show, setShow] = useState(true);
 
   if (!txDetail) {
     return null;
   }
+
+  const handleVote = (approved: boolean) => {
+    // find the tx in the signerTxData
+    const latestData = signerTxData.map((tx) => {
+      if (tx.transaction.txid === txDetail.transaction.txid) {
+        tx.vote_choice = approved ? VOTE_CHOICE.approve : VOTE_CHOICE.reject;
+        return tx;
+      } else {
+        return tx;
+      }
+    });
+
+    setSignerTxData(latestData);
+    setShow(true);
+    setOpen(false);
+  };
   return (
     <>
       <div
         aria-live="assertive"
-        className="pointer-events-none  z-30 fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6"
+        className="  z-10 fixed inset-0 h-[100px] flex items-end px-4 py-6 sm:items-start sm:p-6"
       >
         <div className="flex w-full flex-col items-center space-y-4 sm:items-end">
           {/* Notification panel, dynamically insert this into the live region when it needs to be displayed */}
@@ -61,7 +82,7 @@ const TxDetail = ({ setOpen, open, txDetail }: txDetail) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+            <div className="  z-30 w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
               <div className="p-4">
                 <div className="flex items-start">
                   <div className="flex-shrink-0">
@@ -229,7 +250,7 @@ const TxDetail = ({ setOpen, open, txDetail }: txDetail) => {
                             </p>
                             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                               <dt className="text-sm font-medium leading-6 text-white">
-                                Status
+                                Vote Mechanism
                               </dt>
                               <dd className="mt-1 text-sm break-words leading-6 text-gray-400 sm:col-span-2 sm:mt-0">
                                 {txDetail.vote_mechanism ===
@@ -246,6 +267,14 @@ const TxDetail = ({ setOpen, open, txDetail }: txDetail) => {
                                 )}
                               </dd>
                             </div>
+                            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                              <dt className="text-sm font-medium leading-6 text-white">
+                                Vote Status
+                              </dt>
+                              <dd className="mt-1 text-sm break-words leading-6 text-gray-400 sm:col-span-2 sm:mt-0">
+                                {txDetail.vote_choice}
+                              </dd>
+                            </div>
                             {txDetail.vote_mechanism ===
                               VOTE_MECHANISM.manual && (
                               <>
@@ -254,14 +283,14 @@ const TxDetail = ({ setOpen, open, txDetail }: txDetail) => {
                                 </p>
                                 <div className="w-full flex gap-x-8 py-4  items-center justify-center">
                                   <button
-                                    onClick={() => setShow(true)}
+                                    onClick={() => handleVote(true)}
                                     type="button"
                                     className="relative inline-flex items-center gap-x-8 rounded-xl bg-secondary px-4 py-2 text-md font-semibold text-black shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
                                   >
                                     Approved
                                   </button>
                                   <button
-                                    onClick={() => setShow(true)}
+                                    onClick={() => handleVote(false)}
                                     type="button"
                                     className="relative inline-flex px-8 items-center gap-x-8 rounded-xl bg-secondary-light  py-2 text-md font-semibold text-black shadow-sm hover:bg-secondary-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
                                   >

@@ -129,12 +129,12 @@ const TransactionHistory = () => {
 
       <div className="mx-auto max-w-7xl  pt-20 pb-12 px-4  sm:px-6 lg:px-8">
         <div className="  border-[#616161] border-b-0 rounded-t-2xl border bg-[#121212] ">
-          <div className="sm:flex justify-between px-10 sm:items-baseline pt-16 ">
+          <div className="sm:flex flex-col lg:flex-row gap-y-4 justify-start lg:justify-between px-4 lg:px-10 sm:items-baseline pt-16 ">
             <h1 className="text-2xl md:text-4xl    font-semibold leading-6 text-white">
               Transactions
             </h1>
             <div className="mt-4 sm:ml-10 sm:mt-0">
-              <nav className="-mb-px flex space-x-8">
+              <nav className="-mb-px flex flex-wrap space-x-8">
                 {tabs.map((tab) => (
                   <a
                     key={tab.name}
